@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study_is_good/profile_page.dart';
+import 'package:study_is_good/session_screen.dart';
 import 'package:study_is_good/shop_page.dart';
 
 class BottomNavigationBarExampleApp extends StatelessWidget {
@@ -47,7 +48,10 @@ class _BottomNavigationBarExampleState
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: (){
-
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SessionPage()),
+            );
           },
           child: Icon(Icons.add),
       ),

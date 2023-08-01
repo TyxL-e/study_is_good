@@ -133,16 +133,16 @@ class ShopPage extends StatelessWidget {
         children: <Widget>[
           CustomListItemTwo(
             thumbnail: Image.network("https://preview.redd.it/wallpaper-edit-i-made-that-some-of-you-might-like-v0-qpgq2eua4fva1.png?width=640&crop=smart&auto=webp&s=179228d4b58056adc1ae9c0662c968bebb57582c"),
-            title: 'Flutter 1.0 Launch',
+            title: 'Oshi No Ko banner',
             subtitle: 'Flutter continues to improve and expand its horizons. '
                 'This text should max out at two lines and clip',
-            author: 'Dash',
+            author: 'Unknown',
             publishDate: 'Dec 28',
             readDuration: '5 mins',
           ),
           CustomListItemTwo(
             thumbnail: Image.network("https://i.pinimg.com/736x/b9/25/8b/b9258b10d1ab4ccbfbec08e3612b3e03.jpg"),
-            title: 'Flutter 1.2 Release - Continual updates to the framework',
+            title: 'Minecraft cave',
             subtitle: 'Flutter once again improves and makes updates.',
             author: 'Flutter',
             publishDate: 'Feb 26',
@@ -150,7 +150,7 @@ class ShopPage extends StatelessWidget {
           ),
           CustomListItemTwo(
             thumbnail: Image.network("https://i.pinimg.com/originals/8b/2d/d6/8b2dd6a677a63bb34d2d5e21857116ce.jpg"),
-            title: 'Flutter 1.2 Release - Continual updates to the framework',
+            title: 'm',
             subtitle: 'Flutter once again improves and makes updates.',
             author: 'Flutter',
             publishDate: 'Feb 26',

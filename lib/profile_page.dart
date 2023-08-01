@@ -22,7 +22,7 @@ class ProfilePage extends StatelessWidget {
               'I am Tyler and trying to create an app',
             ),
             Text(
-              'I am 13 years old and like to do sports',
+              'Thank you for using this app to help your study',
             ),
             Image.network("https://as1.ftcdn.net/v2/jpg/00/49/22/40/1000_F_49224094_FJ1XuQg4ctxoPeaS5VpiUUzwNnI3xJH3.jpg")
         ],
