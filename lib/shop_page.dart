@@ -8,8 +8,8 @@ class _ArticleDescription extends StatelessWidget {
     required this.publishDate,
     required this.readDuration,
   });
-
   final String title;
+
   final String subtitle;
   final String author;
   final String publishDate;
