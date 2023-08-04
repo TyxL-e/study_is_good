@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>877728621082-ll2t4meg6vcpo37gi6i0tenuh0d13ich.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.877728621082-ll2t4meg6vcpo37gi6i0tenuh0d13ich</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCxUNUfsap7OcVba0LYP-h6ztg1CLjongA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>877728621082</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.codingminds.studyIsGood</string>
+	<key>PROJECT_ID</key>
+	<string>reading-extension-175ab</string>
+	<key>STORAGE_BUCKET</key>
+	<string>reading-extension-175ab.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:877728621082:ios:de0df023cdedede4f327a3</string>
+	<key>DATABASE_URL</key>
+	<string>https://reading-extension-175ab-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

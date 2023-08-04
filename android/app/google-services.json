@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "877728621082",
+    "firebase_url": "https://reading-extension-175ab-default-rtdb.firebaseio.com",
+    "project_id": "reading-extension-175ab",
+    "storage_bucket": "reading-extension-175ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877728621082:android:0944b76fa056cd96f327a3",
+        "android_client_info": {
+          "package_name": "com.codingminds.study_is_good"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877728621082-mlr63mu6l3vn9iaine6udk7os8vdusc9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxWW-jdyQOGkR172t1aOE4hFKNJS9fDVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "877728621082-mlr63mu6l3vn9iaine6udk7os8vdusc9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
