@@ -5,13 +5,10 @@ class SessionPage extends StatefulWidget {
     super.key,
   });
 
-
   @override
   State<SessionPage> createState() => _SessionPageState();
 }
 
-// The State class is responsible for two things: holding some data you can
-// update and building the UI using that data.
 class _SessionPageState extends State<SessionPage> {
   // Whether the green box should be visible
   bool _visible = true;
@@ -73,7 +70,13 @@ class _SessionPageState extends State<SessionPage> {
                 ),
               ]
             ),
+            IconButton(
+                iconSize: 100,
+                onPressed: () {
 
+                },
+                icon: Icon(Icons.play_circle),
+            )
           ],
         ),
       ),
