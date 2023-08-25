@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:study_is_good/profile_page.dart';
 import 'package:study_is_good/session_screen.dart';
 import 'package:study_is_good/shop_page.dart';
+import 'package:study_is_good/test_everything_screen.dart';
 
 class BottomNavigationBarControl extends StatefulWidget {
   const BottomNavigationBarControl({super.key});
@@ -14,10 +15,10 @@ class BottomNavigationBarControl extends StatefulWidget {
 class _BottomNavigationBarControlState
     extends State<BottomNavigationBarControl> {
   int _selectedIndex = 0;
-  static List<Widget> _widgetOptions = <Widget>[
-    ProfilePage(),
-    ShopPage(),
-    ProfilePage(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const ProfilePage(),
+    const ShopPage(),
+    const TestEverythingScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -42,7 +43,7 @@ class _BottomNavigationBarControlState
               MaterialPageRoute(builder: (context) => const SessionPage()),
             );
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
