@@ -17,12 +17,6 @@ class SessionPage extends StatefulWidget {
 
 class _SessionPageState extends State<SessionPage> {
   bool _visible = true;
-
-
-
-
-
-
   late Timer _timer;
   int _sec = 10;
   int _min = 10;
@@ -46,15 +40,11 @@ class _SessionPageState extends State<SessionPage> {
     );
   }
 
-
-
-
   @override
   void dispose() {
     _timer.cancel();
     super.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -152,6 +142,7 @@ class _SessionPageState extends State<SessionPage> {
 
 
       floatingActionButton: FloatingActionButton(
+        heroTag: "OPACITY BUTTON",
         onPressed: () {
 
 

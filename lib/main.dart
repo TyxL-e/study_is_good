@@ -137,7 +137,7 @@ void onStart(ServiceInstance service) async {
     service.stopSelf();
   });
 
-  // bring to foreground
+  //bring to foreground
   Timer.periodic(const Duration(seconds: 1), (timer) async {
     if (service is AndroidServiceInstance) {
       if (await service.isForegroundService()) {

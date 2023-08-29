@@ -21,9 +21,6 @@ class _TestEverythingScreenState extends State<TestEverythingScreen> {
   @override
   Widget build(BuildContext context) {
       return Scaffold(
-        appBar: AppBar(
-          title: const Text('Service App'),
-        ),
         body: Column(
           children: [
             StreamBuilder<Map<String, dynamic>?>(
@@ -83,6 +80,7 @@ class _TestEverythingScreenState extends State<TestEverythingScreen> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: "CUTE BUTTON",
           onPressed: () {},
           child: const Icon(Icons.play_arrow),
         ),

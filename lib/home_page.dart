@@ -36,15 +36,15 @@ class _BottomNavigationBarControlState
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      floatingActionButton: FloatingActionButton(
-          onPressed: (){
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const SessionPage()),
-            );
-          },
-          child: const Icon(Icons.add),
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //     onPressed: (){
+      //       Navigator.push(
+      //         context,
+      //         MaterialPageRoute(builder: (context) => const SessionPage()),
+      //       );
+      //     },
+      //     child: const Icon(Icons.add),
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
