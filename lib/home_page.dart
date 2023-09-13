@@ -18,7 +18,8 @@ class _BottomNavigationBarControlState
   static final List<Widget> _widgetOptions = <Widget>[
     const ProfilePage(),
     const ShopPage(),
-    const TestEverythingScreen(),
+    //const TestEverythingScreen(),
+    //const SessionPage(),
   ];
 
   void _onItemTapped(int index) {
@@ -30,9 +31,6 @@ class _BottomNavigationBarControlState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ok.'),
-      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
@@ -55,10 +53,14 @@ class _BottomNavigationBarControlState
             icon: Icon(Icons.add_business_outlined),
             label: 'Shop',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: 'Profile',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.account_circle),
+          //   label: 'Profile',
+          //),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.sensors_sharp),
+          //   label: 'Session',
+          // ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],

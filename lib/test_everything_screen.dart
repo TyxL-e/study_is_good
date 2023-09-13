@@ -18,9 +18,13 @@ class TestEverythingScreen extends StatefulWidget {
 
 class _TestEverythingScreenState extends State<TestEverythingScreen> {
   String text = "Stop Service";
+
   @override
   Widget build(BuildContext context) {
       return Scaffold(
+        appBar: AppBar(
+
+        ),
         body: Column(
           children: [
             StreamBuilder<Map<String, dynamic>?>(

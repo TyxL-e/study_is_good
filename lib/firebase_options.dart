@@ -47,33 +47,34 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCwQb5jrBTwKeaWBZUcVPQYyW6TEH9IkXk',
-    appId: '1:877728621082:web:19999e0ed8c428aef327a3',
-    messagingSenderId: '877728621082',
-    projectId: 'reading-extension-175ab',
-    authDomain: 'reading-extension-175ab.firebaseapp.com',
-    databaseURL: 'https://reading-extension-175ab-default-rtdb.firebaseio.com',
-    storageBucket: 'reading-extension-175ab.appspot.com',
-    measurementId: 'G-DPQPZ62LFD',
+    apiKey: 'AIzaSyCc9dZ0gKy118IC6UTUU4vyBzd807Qlv8A',
+    appId: '1:881122469323:web:b3ead63c419aa9f7c6024e',
+    messagingSenderId: '881122469323',
+    projectId: 'chat-app-91a9d',
+    authDomain: 'chat-app-91a9d.firebaseapp.com',
+    databaseURL: 'https://chat-app-91a9d-default-rtdb.firebaseio.com',
+    storageBucket: 'chat-app-91a9d.appspot.com',
+    measurementId: 'G-0X3VYZ2877',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCxWW-jdyQOGkR172t1aOE4hFKNJS9fDVw',
-    appId: '1:877728621082:android:0944b76fa056cd96f327a3',
-    messagingSenderId: '877728621082',
-    projectId: 'reading-extension-175ab',
-    databaseURL: 'https://reading-extension-175ab-default-rtdb.firebaseio.com',
-    storageBucket: 'reading-extension-175ab.appspot.com',
+    apiKey: 'AIzaSyCaJmPtsAPo9KROns6q2uhwzDCX6_xHY4U',
+    appId: '1:881122469323:android:5000884a477b0c2dc6024e',
+    messagingSenderId: '881122469323',
+    projectId: 'chat-app-91a9d',
+    databaseURL: 'https://chat-app-91a9d-default-rtdb.firebaseio.com',
+    storageBucket: 'chat-app-91a9d.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCxUNUfsap7OcVba0LYP-h6ztg1CLjongA',
-    appId: '1:877728621082:ios:de0df023cdedede4f327a3',
-    messagingSenderId: '877728621082',
-    projectId: 'reading-extension-175ab',
-    databaseURL: 'https://reading-extension-175ab-default-rtdb.firebaseio.com',
-    storageBucket: 'reading-extension-175ab.appspot.com',
-    iosClientId: '877728621082-ll2t4meg6vcpo37gi6i0tenuh0d13ich.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBKLW7guOzj3tDZUWzH6BwqatExC6WOlMo',
+    appId: '1:881122469323:ios:3feff51fd34a95c8c6024e',
+    messagingSenderId: '881122469323',
+    projectId: 'chat-app-91a9d',
+    databaseURL: 'https://chat-app-91a9d-default-rtdb.firebaseio.com',
+    storageBucket: 'chat-app-91a9d.appspot.com',
+    androidClientId: '881122469323-4vgifp6vhnm4hhpsq917j7jpcuo34pfm.apps.googleusercontent.com',
+    iosClientId: '881122469323-pn9cq7r62auvo61pklsu2o8us3u7658u.apps.googleusercontent.com',
     iosBundleId: 'com.codingminds.studyIsGood',
   );
 }

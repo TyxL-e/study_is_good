@@ -127,6 +127,9 @@ class ShopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Shop Page"),
+      ),
       body: ListView(
         padding: const EdgeInsets.all(10.0),
         children: <Widget>[

@@ -1,10 +1,11 @@
-import 'dart:developer';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:study_is_good/authentication/auth.dart';
+import 'package:study_is_good/firebase/db.dart';
 import 'package:study_is_good/main.dart';
+import 'package:study_is_good/session_screen.dart';
 
 
 /// Displayed as a profile image if the user doesn't have one.
@@ -25,6 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
   late User user;
   late TextEditingController controller;
   final phoneController = TextEditingController();
+  final db = FirebaseFirestore.instance;
 
   String? photoURL;
 
@@ -174,6 +176,47 @@ class _ProfilePageState extends State<ProfilePage> {
                         onPressed: _signOut,
                         child: const Text('Sign out'),
                       ),
+                      const Divider(),
+                      ElevatedButton(
+                        onPressed: () async{
+                          final player = Player(
+                            uid: user.uid,
+                            points: 100,
+                            achievements: ["Super Studier level 1", "Super Studier level 2", "Novice level 1"],
+                          );
+                          final docRef = db
+                              .collection("Players")
+                              .withConverter(
+                            fromFirestore: Player.fromFirestore,
+                            toFirestore: (Player player, options) => player.toFirestore(),
+                          )
+                              .doc(user.uid);
+                          await docRef.set(player);
+                        },
+                        child: const Text("Database"),
+                      ),
+                      ElevatedButton(
+                        onPressed:  () async{
+                          final ref = db.collection("Players").doc(user.uid).withConverter(
+                            fromFirestore: Player.fromFirestore,
+                            toFirestore: (Player player, _) => player.toFirestore(),
+                          );
+                          final docSnap = await ref.get();
+                          final player = docSnap.data(); // Convert to City object
+                          if (player != null) {
+                            print(player.achievements);
+                          } else {
+                            print("No such document.");
+                          }
+                        },
+                        child: const Text('read database'),
+                      ),
+
+                      const Divider(),
+                      TextButton(
+                        onPressed: _deleteUser,
+                        child: const Text('Delete User'),
+                      ),
                     ],
                   ),
                 ),
@@ -194,6 +237,15 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
             )
           ],
+        ),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  SessionPage()),
+              );
+            },
+            label: const Text("Study Challenges!"),
         ),
       ),
     );
@@ -245,5 +297,11 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> _signOut() async {
     await auth.signOut();
     await GoogleSignIn().signOut();
+  }
+
+  /// Example code for sign out.
+  Future<void> _deleteUser() async {
+    await auth.currentUser?.delete();
+    await GoogleSignIn().disconnect();
   }
 }

@@ -3,21 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>877728621082-ll2t4meg6vcpo37gi6i0tenuh0d13ich.apps.googleusercontent.com</string>
+	<string>881122469323-pn9cq7r62auvo61pklsu2o8us3u7658u.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.877728621082-ll2t4meg6vcpo37gi6i0tenuh0d13ich</string>
+	<string>com.googleusercontent.apps.881122469323-pn9cq7r62auvo61pklsu2o8us3u7658u</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>881122469323-4vgifp6vhnm4hhpsq917j7jpcuo34pfm.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCxUNUfsap7OcVba0LYP-h6ztg1CLjongA</string>
+	<string>AIzaSyBKLW7guOzj3tDZUWzH6BwqatExC6WOlMo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>877728621082</string>
+	<string>881122469323</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.codingminds.studyIsGood</string>
 	<key>PROJECT_ID</key>
-	<string>reading-extension-175ab</string>
+	<string>chat-app-91a9d</string>
 	<key>STORAGE_BUCKET</key>
-	<string>reading-extension-175ab.appspot.com</string>
+	<string>chat-app-91a9d.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +31,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:877728621082:ios:de0df023cdedede4f327a3</string>
+	<string>1:881122469323:ios:3feff51fd34a95c8c6024e</string>
 	<key>DATABASE_URL</key>
-	<string>https://reading-extension-175ab-default-rtdb.firebaseio.com</string>
+	<string>https://chat-app-91a9d-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>
