@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_is_good/home_screen.dart';
 import 'package:study_is_good/profile_page.dart';
 import 'package:study_is_good/session_screen.dart';
 import 'package:study_is_good/shop_page.dart';
@@ -16,10 +17,9 @@ class _BottomNavigationBarControlState
     extends State<BottomNavigationBarControl> {
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
-    const ProfilePage(),
+    const HomeScreen(),
     const ShopPage(),
-    //const TestEverythingScreen(),
-    //const SessionPage(),
+    const ProfilePage(),
   ];
 
   void _onItemTapped(int index) {
@@ -34,15 +34,6 @@ class _BottomNavigationBarControlState
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      // floatingActionButton: FloatingActionButton(
-      //     onPressed: (){
-      //       Navigator.push(
-      //         context,
-      //         MaterialPageRoute(builder: (context) => const SessionPage()),
-      //       );
-      //     },
-      //     child: const Icon(Icons.add),
-      // ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -53,10 +44,10 @@ class _BottomNavigationBarControlState
             icon: Icon(Icons.add_business_outlined),
             label: 'Shop',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.account_circle),
-          //   label: 'Profile',
-          //),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle),
+            label: 'Profile',
+          ),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.sensors_sharp),
           //   label: 'Session',

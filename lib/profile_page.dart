@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:study_is_good/authentication/auth.dart';
 import 'package:study_is_good/firebase/db.dart';
+import 'package:study_is_good/firebase/db2.dart';
 import 'package:study_is_good/main.dart';
 import 'package:study_is_good/session_screen.dart';
+import 'package:study_is_good/test_everything_screen.dart';
 
 
 /// Displayed as a profile image if the user doesn't have one.
@@ -27,6 +29,13 @@ class _ProfilePageState extends State<ProfilePage> {
   late TextEditingController controller;
   final phoneController = TextEditingController();
   final db = FirebaseFirestore.instance;
+  String love = "";
+  final modelsRef =
+  FirebaseFirestore.instance.collection('StudyIsGood').doc("Novice Learner Level 1").withConverter<Achieve>(
+    fromFirestore: Achieve.fromFirestore,
+    toFirestore: (Achieve achieve, options) => achieve.toFirestore(),
+  );
+  String image1 = "";
 
   String? photoURL;
 
@@ -37,9 +46,8 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     user = auth.currentUser!;
     controller = TextEditingController(text: user.displayName);
-
     controller.addListener(_onNameChanged);
-
+    //getMedals();
     auth.userChanges().listen((event) {
       if (event != null && mounted) {
         setState(() {
@@ -54,7 +62,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void dispose() {
     controller.removeListener(_onNameChanged);
-
     super.dispose();
   }
 
@@ -73,6 +80,11 @@ class _ProfilePageState extends State<ProfilePage> {
       }
     });
   }
+
+  // Future getMedals() async {
+  //   image1 = await FirebaseStorage.instance.ref().child("/StudyIsGood").child().getDownloadURL();
+  //   print(image1);
+  // }
 
   /// Map User provider data into a list of Provider Ids.
   List get userProviders => user.providerData.map((e) => e.providerId).toList();
@@ -171,6 +183,33 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                              height: 50,
+                              width: 70,
+                              child: Image(
+                                  image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FBronze_learner_1.jpg?alt=media&token=ead75805-ba7b-4e62-b64d-d31afdf00c22"),
+                              )
+                          ),
+                          SizedBox(
+                              height: 50,
+                              width: 70,
+                              child: Image(
+                                image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FBronze_learner_1.jpg?alt=media&token=ead75805-ba7b-4e62-b64d-d31afdf00c22"),
+                              )
+                          ),
+                          SizedBox(
+                              height: 50,
+                              width: 70,
+                              child: Image(
+                                image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FBronze_learner_1.jpg?alt=media&token=ead75805-ba7b-4e62-b64d-d31afdf00c22"),
+                              )
+                          )
+                        ],
+                      ),
+                      const SizedBox(height: 20),
                       const Divider(),
                       TextButton(
                         onPressed: _signOut,
@@ -182,22 +221,23 @@ class _ProfilePageState extends State<ProfilePage> {
                           final player = Player(
                             uid: user.uid,
                             points: 100,
-                            achievements: ["Super Studier level 1", "Super Studier level 2", "Novice level 1"],
+                            achievements: ["Bronze_learner_1", "novice_learner_level_1", "novice_learner_level_1"],
                           );
                           final docRef = db
-                              .collection("Players")
+                              .collection("StudyIsGood")
+                              .doc("Players")
+                              .collection("All Users")
                               .withConverter(
                             fromFirestore: Player.fromFirestore,
                             toFirestore: (Player player, options) => player.toFirestore(),
-                          )
-                              .doc(user.uid);
+                          ).doc(user.uid);
                           await docRef.set(player);
                         },
                         child: const Text("Database"),
                       ),
                       ElevatedButton(
                         onPressed:  () async{
-                          final ref = db.collection("Players").doc(user.uid).withConverter(
+                          final ref = db.collection("StudyIsGood").doc("Players").collection("All Users").doc(user.uid).withConverter(
                             fromFirestore: Player.fromFirestore,
                             toFirestore: (Player player, _) => player.toFirestore(),
                           );
@@ -211,8 +251,37 @@ class _ProfilePageState extends State<ProfilePage> {
                         },
                         child: const Text('read database'),
                       ),
-
                       const Divider(),
+                      ElevatedButton(
+                        onPressed: () async{
+                          final achieve = Achieve(
+                            name: "Novice Learner Level 1",
+                            pNeeded: 0,
+                            image: "https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/Novice Learner Level 1.jpg"
+                          );
+                          final ref = db
+                              .collection("StudyIsGood")
+                              .withConverter(
+                            fromFirestore: Achieve.fromFirestore,
+                            toFirestore: (Achieve achieve, options) => achieve.toFirestore(),
+                          ).doc("Novice Learner Level 1");
+                          await ref.set(achieve);
+                        },
+                        child: const Text("Update Trophy"),
+                      ),
+                      const Divider(),
+                      ElevatedButton(
+                        onPressed:  () async{
+                          final docSnap = await modelsRef.get();
+                          final player = docSnap.data(); // Convert to City object
+                          if (player != null) {
+                            print(player.pNeeded);
+                          } else {
+                            print("No such document.");
+                          }
+                        },
+                        child: const Text('read achievements'),
+                      ),
                       TextButton(
                         onPressed: _deleteUser,
                         child: const Text('Delete User'),
@@ -242,7 +311,7 @@ class _ProfilePageState extends State<ProfilePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  SessionPage()),
+                MaterialPageRoute(builder: (context) =>  const TestAudioPlaylist()),
               );
             },
             label: const Text("Study Challenges!"),
