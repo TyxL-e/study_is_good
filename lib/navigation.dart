@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:study_is_good/authentication/auth.dart';
 import 'package:study_is_good/home_screen.dart';
 import 'package:study_is_good/profile_page.dart';
 import 'package:study_is_good/session_screen.dart';
-import 'package:study_is_good/shop_page.dart';
+import 'package:study_is_good/shops/cart_page.dart';
+import 'package:study_is_good/shops/shop_page.dart';
+import 'package:study_is_good/shops/shop_test.dart';
 import 'package:study_is_good/test_everything_screen.dart';
 
 class BottomNavigationBarControl extends StatefulWidget {
@@ -18,7 +22,7 @@ class _BottomNavigationBarControlState
   int _selectedIndex = 0;
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    const ShopPage(),
+    const MyCatalog(),
     const ProfilePage(),
   ];
 
@@ -59,5 +63,27 @@ class _BottomNavigationBarControlState
       ),
     );
   }
+}
+
+GoRouter router() {
+  return GoRouter(
+    initialLocation: '/login',
+    routes: [
+      GoRoute(
+        path: '/login',
+        builder: (context, state) => const AuthGate(),
+      ),
+      GoRoute(
+        path: '/catalog',
+        builder: (context, state) => const MyCatalog(),
+        routes: [
+          GoRoute(
+            path: 'cart',
+            builder: (context, state) => const MyCart(),
+          ),
+        ],
+      ),
+    ],
+  );
 }
 

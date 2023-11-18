@@ -7,7 +7,8 @@ import 'package:study_is_good/firebase/db.dart';
 import 'package:study_is_good/firebase/db2.dart';
 import 'package:study_is_good/main.dart';
 import 'package:study_is_good/session_screen.dart';
-import 'package:study_is_good/test_everything_screen.dart';
+import 'package:study_is_good/study/sessions2.dart';
+import 'package:study_is_good/study/disclaimer.dart';
 
 
 /// Displayed as a profile image if the user doesn't have one.
@@ -311,7 +312,7 @@ class _ProfilePageState extends State<ProfilePage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) =>  const TestAudioPlaylist()),
+                MaterialPageRoute(builder: (context) =>  const DisclaimerPage()),
               );
             },
             label: const Text("Study Challenges!"),
@@ -366,6 +367,10 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> _signOut() async {
     await auth.signOut();
     await GoogleSignIn().signOut();
+    // if(mounted) {
+    //   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+    //   const AuthApp()), (Route<dynamic> route) => false);
+    // }
   }
 
   /// Example code for sign out.

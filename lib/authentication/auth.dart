@@ -1,6 +1,9 @@
+import 'dart:ffi';
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:study_is_good/firebase/db.dart';
 import 'package:study_is_good/main.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -104,18 +107,6 @@ class _AuthGateState extends State<AuthGate> {
         ),
         Buttons.Google: () => _handleMultiFactorException(
           _signInWithGoogle,
-        ),
-        Buttons.GitHub: () => _handleMultiFactorException(
-          _signInWithGitHub,
-        ),
-        Buttons.Microsoft: () => _handleMultiFactorException(
-          _signInWithMicrosoft,
-        ),
-        Buttons.Twitter: () => _handleMultiFactorException(
-          _signInWithTwitter,
-        ),
-        Buttons.Yahoo: () => _handleMultiFactorException(
-          _signInWithYahoo,
         ),
       };
     }
@@ -253,32 +244,6 @@ class _AuthGateState extends State<AuthGate> {
                             ),
                           )
                               .toList(),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 50,
-                            child: OutlinedButton(
-                              onPressed: isLoading
-                                  ? null
-                                  : () {
-                                if (mode != AuthMode.phone) {
-                                  setState(() {
-                                    mode = AuthMode.phone;
-                                  });
-                                } else {
-                                  setState(() {
-                                    mode = AuthMode.login;
-                                  });
-                                }
-                              },
-                              child: isLoading
-                                  ? const CircularProgressIndicator.adaptive()
-                                  : Text(
-                                mode != AuthMode.phone
-                                    ? 'Sign in with Phone Number'
-                                    : 'Sign in with Email and Password',
-                              ),
-                            ),
-                          ),
                           const SizedBox(height: 20),
                           if (mode != AuthMode.phone)
                             RichText(
@@ -308,20 +273,6 @@ class _AuthGateState extends State<AuthGate> {
                               ),
                             ),
                           const SizedBox(height: 10),
-                          RichText(
-                            text: TextSpan(
-                              style: Theme.of(context).textTheme.bodyLarge,
-                              children: [
-                                const TextSpan(text: 'Or '),
-                                TextSpan(
-                                  text: 'continue as guest',
-                                  style: const TextStyle(color: Colors.blue),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = _anonymousAuth,
-                                ),
-                              ],
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -459,7 +410,30 @@ class _AuthGateState extends State<AuthGate> {
         await auth.createUserWithEmailAndPassword(
           email: emailController.text,
           password: passwordController.text,
-        );
+        ).then((value) async {
+          final player = Player(
+            uid: value.user!.uid,
+            points: 100,
+            achievements: ["Bronze_learner_1", "novice_learner_level_1", "novice_learner_level_1"],
+          );
+          final docRef = FirebaseFirestore.instance
+              .collection("StudyIsGood")
+              .doc("Players")
+              .collection("All Users")
+              .withConverter(
+            fromFirestore: Player.fromFirestore,
+            toFirestore: (Player player, options) => player.toFirestore(),
+          ).doc(value.user!.uid);
+          await docRef.set(player);
+          await FirebaseFirestore.instance
+              .collection("StudyIsGood")
+              .doc("Players")
+              .collection("All User Points")
+              .doc(value.user!.uid)
+              .set({
+                "points": 100,
+          });
+        });
       } else {
         await _phoneAuth();
       }

@@ -36,3 +36,23 @@ class Player {
     };
   }
 }
+
+String collection = 'News';
+
+Future<Map> getData() async {
+  var data = {};
+  await FirebaseFirestore.instance
+      .collection("StudyIsGood")
+      .doc("Achievements")
+      .collection("YourBanners")
+      .get()
+      .then((querySnapshot) {
+    for (var docSnapshot in querySnapshot.docs) {
+      // print('${docSnapshot.id} => ${docSnapshot.data()}');
+      if (docSnapshot.id != 'users') data[docSnapshot.id] = docSnapshot.data();
+    }
+  });
+  return data;
+}
+
+

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:study_is_good/home_page.dart';
+import 'package:study_is_good/navigation.dart';
 
 import 'package:study_is_good/main.dart';
 
