@@ -466,7 +466,8 @@ class _TestCountDownTimerState extends State<TestCountDownTimer> with TickerProv
                           .collection("StudyIsGood")
                           .doc("Players")
                           .collection("All Users")
-                          .doc(user.uid).collection("All Sessions")
+                          .doc(user.uid)
+                          .collection("All Sessions")
                           .add({
                               "time": sessionTime,
                               "points": widget.points
