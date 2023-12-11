@@ -415,6 +415,8 @@ class _AuthGateState extends State<AuthGate> {
             uid: value.user!.uid,
             points: 100,
             achievements: ["Bronze_learner_1", "novice_learner_level_1", "novice_learner_level_1"],
+            username: value.user!.displayName ?? "Fellow Friend",
+            picURL: value.user!.photoURL ?? "https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FStraw%20Hat%20Crew.jpg?alt=media&token=810108d2-8979-4976-b75c-ce14e07e6b16"
           );
           final docRef = FirebaseFirestore.instance
               .collection("StudyIsGood")

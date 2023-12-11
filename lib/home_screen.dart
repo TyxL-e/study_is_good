@@ -6,6 +6,7 @@ import 'package:study_is_good/audioplayers/common.dart';
 import 'package:study_is_good/main.dart';
 import 'package:study_is_good/models/allUserPoints.dart';
 import 'package:study_is_good/models/sessions.dart';
+import 'package:study_is_good/otherProfile.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -80,10 +81,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin, 
               Expanded(
                 flex: 4,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: SafeArea(
                       child: StreamBuilder(
-                        stream: allUserPointsRef.orderBy("points",descending: true).snapshots(), //.orderBy("date",descending: true)
+                        stream: allUserPointsRef.orderBy("points",descending: true).snapshots(),
                         builder: (context,snapshot) {
                           if (snapshot.hasError) {
                             return Center(
@@ -94,12 +95,47 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin, 
                             return const Center(child: CircularProgressIndicator());
                           }
                           final data = snapshot.requireData.docs.toList();
-                          return ListView.builder(
-                              itemCount: data.length,
-                              itemBuilder: (context,index) {
-                                return ListTile(
-                                  title: Text(data[index].data().toString()),
-                                  subtitle: Text(data[index].data().points.toString()),
+                          final List userIds = [];
+                          for (final doc in data) {
+                            final documentId = doc.id;
+                            userIds.add(documentId);
+                          }
+                          return FutureBuilder(
+                              future: getUsersInfo(userIds),
+                              builder: (context, snapshot) {
+                                if (snapshot.connectionState == ConnectionState.waiting) {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+
+                                if (snapshot.hasError) {
+                                  return Center(
+                                    child: Text(snapshot.error.toString()),
+                                  );
+                                }
+                                final List<DocumentSnapshot> userIds = snapshot.data!;
+                                return ListView.builder(
+                                    itemCount: data.length,
+                                    itemBuilder: (context,index) {
+                                      final userId = userIds[index].data() as Map<String, dynamic>;
+                                      return GestureDetector(
+                                        onTap: (){
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => OtherProfilePage(
+                                                userInfo: userId,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: ListTile(
+                                          title: Text(userId["username"]),
+                                          subtitle: Text(data[index].data().points.toString()),
+                                        ),
+                                      );
+                                    }
                                 );
                               }
                           );
@@ -144,12 +180,20 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin, 
       ),
     );
   }
+
+  Future<List<DocumentSnapshot>> getUsersInfo(List userIds) async {
+    final List<Future<DocumentSnapshot>> futures = userIds
+        .map((userId) => FirebaseFirestore
+        .instance
+        .collection("StudyIsGood")
+        .doc("Players")
+        .collection("All Users")
+        .doc(userId)
+        .get())
+        .toList();
+
+    final List<DocumentSnapshot> userInfo = await Future.wait(futures);
+    return userInfo;
+  }
+
 }
-
-
-
-
-
-
-
-

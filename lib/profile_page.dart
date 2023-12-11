@@ -92,6 +92,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future updateDisplayName() async {
     await user.updateDisplayName(controller.text);
+    await FirebaseFirestore.instance
+        .collection("StudyIsGood")
+        .doc("Players")
+        .collection("All Users")
+        .doc(user.uid)
+        .update(
+      {"username": controller.text},
+    );
 
     setState(() {
       showSaveButton = false;
@@ -184,31 +192,36 @@ class _ProfilePageState extends State<ProfilePage> {
                         ],
                       ),
                       const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                              height: 50,
-                              width: 70,
-                              child: Image(
-                                  image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FBronze_learner_1.jpg?alt=media&token=ead75805-ba7b-4e62-b64d-d31afdf00c22"),
+                      StreamBuilder<Object>(
+                        stream: null,
+                        builder: (context, snapshot) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(
+                                  height: 50,
+                                  width: 70,
+                                  child: Image(
+                                      image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FBronze_learner_1.jpg?alt=media&token=ead75805-ba7b-4e62-b64d-d31afdf00c22"),
+                                  )
+                              ),
+                              SizedBox(
+                                  height: 50,
+                                  width: 70,
+                                  child: Image(
+                                    image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FBronze_learner_1.jpg?alt=media&token=ead75805-ba7b-4e62-b64d-d31afdf00c22"),
+                                  )
+                              ),
+                              SizedBox(
+                                  height: 50,
+                                  width: 70,
+                                  child: Image(
+                                    image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FBronze_learner_1.jpg?alt=media&token=ead75805-ba7b-4e62-b64d-d31afdf00c22"),
+                                  )
                               )
-                          ),
-                          SizedBox(
-                              height: 50,
-                              width: 70,
-                              child: Image(
-                                image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FBronze_learner_1.jpg?alt=media&token=ead75805-ba7b-4e62-b64d-d31afdf00c22"),
-                              )
-                          ),
-                          SizedBox(
-                              height: 50,
-                              width: 70,
-                              child: Image(
-                                image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FBronze_learner_1.jpg?alt=media&token=ead75805-ba7b-4e62-b64d-d31afdf00c22"),
-                              )
-                          )
-                        ],
+                            ],
+                          );
+                        }
                       ),
                       const SizedBox(height: 20),
                       const Divider(),

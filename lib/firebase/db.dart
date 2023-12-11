@@ -5,12 +5,16 @@ class Player {
   final String? uid;
   final int? points;
   final List<String>? achievements;
+  final String? username;
+  final String? picURL;
 
 
   Player({
     this.uid,
     this.points,
     this.achievements,
+    this.username,
+    this.picURL
   });
 
 
@@ -24,6 +28,8 @@ class Player {
       points: data?['points'],
       achievements:
       data?['achievements'] is Iterable ? List.from(data?['achievements']) : null,
+      username: data?['username'],
+      picURL: data?['picURL'],
     );
   }
 
@@ -33,6 +39,8 @@ class Player {
       if (uid != null) "uid": uid,
       if (points != null) "points": points,
       if (achievements != null) "achievements": achievements,
+      if (username != null) "username": username,
+      if (picURL != null) "picURL": picURL,
     };
   }
 }
