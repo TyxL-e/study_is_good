@@ -1,39 +1,35 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-/// A proxy of the catalog of items the user can buy.
-///
-/// In a real app, this might be backed by a backend and cached on device.
-/// In this sample app, the catalog is procedurally generated and infinite.
-///
-/// For simplicity, the catalog is expected to be immutable (no products are
-/// expected to be added, removed or changed during the execution of the app).
 class CatalogModel {
-  static List<String> itemNames = [
-    'Code Smell',
-    'Control Flow',
-    // 'Interpreter',
-    // 'Recursion',
-    // 'Sprint',
-    // 'Heisenbug',
-    // 'Spaghetti',
-    // 'Hydra Code',
-    // 'Off-By-One',
-    // 'Scope',
-    // 'Callback',
-    // 'Closure',
-    // 'Automata',
-    // 'Bit Shift',
-    // 'Currying',
-  ];
+
+  static List firestoreItems = [];
+
+  Future getItemsFromFirestore() async {
+    final snapshot = await FirebaseFirestore.instance
+        .collection("StudyIsGood")
+        .doc("Achievements")
+        .collection("YourBanners")
+        .get();
+
+    firestoreItems = [];
+    for (var doc in snapshot.docs) {
+      final data = doc.data();
+      //final name = data['title'].toString(); // Assuming "name" field for item names
+      firestoreItems.add(data);
+    }
+    return firestoreItems;
+  }
 
   /// Get item by [id].
   ///
   /// In this sample, the catalog is infinite, looping over [itemNames].
   Item getById(int id) {
-    if (id >= itemNames.length) {
+    if (id >= firestoreItems.length) {
       throw Exception('Invalid item ID');
     }
-    return Item(id, itemNames[id]);
+    //return firestoreItems[id];
+    return Item(id, firestoreItems[id]['title'],firestoreItems[id]['pictureURL'],firestoreItems[id]['points']);
   }
 
 
@@ -43,17 +39,15 @@ class CatalogModel {
   }
 }
 
+
 @immutable
 class Item {
   final int id;
   final String name;
-  //final Color color;
-  final int price = 42;
+  final String pictureURL;
+  final int price;
 
-  Item(this.id, this.name);
-  // To make the sample app look nicer, each item is given one of the
-  // Material Design primary colors.
-      //: color = Colors.primaries[id % Colors.primaries.length];
+  Item(this.id, this.name, this.pictureURL, this.price);
 
   @override
   int get hashCode => id;

@@ -95,21 +95,21 @@ class _AuthGateState extends State<AuthGate> {
     }
 
     if (!kIsWeb && Platform.isMacOS) {
-      authButtons = {
-        Buttons.Apple: () => _handleMultiFactorException(
-          _signInWithApple,
-        ),
-      };
-    } else {
-      authButtons = {
-        Buttons.Apple: () => _handleMultiFactorException(
-          _signInWithApple,
-        ),
-        Buttons.Google: () => _handleMultiFactorException(
-          _signInWithGoogle,
-        ),
-      };
-    }
+    //   authButtons = {
+    //     Buttons.Apple: () => _handleMultiFactorException(
+    //       _signInWithApple,
+    //     ),
+    //   };
+    // } else {
+    //   authButtons = {
+    //     Buttons.Apple: () => _handleMultiFactorException(
+    //       _signInWithApple,
+    //     ),
+    //     Buttons.Google: () => _handleMultiFactorException(
+    //       _signInWithGoogle,
+    //     ),
+    //   };
+     }
   }
 
   @override
@@ -219,31 +219,31 @@ class _AuthGateState extends State<AuthGate> {
                             onPressed: _resetPassword,
                             child: const Text('Forgot password?'),
                           ),
-                          ...authButtons.keys
-                              .map(
-                                (button) => Padding(
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 5),
-                              child: AnimatedSwitcher(
-                                duration: const Duration(milliseconds: 200),
-                                child: isLoading
-                                    ? Container(
-                                  color: Colors.grey[200],
-                                  height: 50,
-                                  width: double.infinity,
-                                )
-                                    : SizedBox(
-                                  width: double.infinity,
-                                  height: 50,
-                                  child: SignInButton(
-                                    button,
-                                    onPressed: authButtons[button]!,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                              .toList(),
+                          // ...authButtons.keys
+                          //     .map(
+                          //       (button) => Padding(
+                          //     padding:
+                          //     const EdgeInsets.symmetric(vertical: 5),
+                          //     child: AnimatedSwitcher(
+                          //       duration: const Duration(milliseconds: 200),
+                          //       child: isLoading
+                          //           ? Container(
+                          //         color: Colors.grey[200],
+                          //         height: 50,
+                          //         width: double.infinity,
+                          //       )
+                          //           : SizedBox(
+                          //         width: double.infinity,
+                          //         height: 50,
+                          //         child: SignInButton(
+                          //           button,
+                          //           onPressed: authButtons[button]!,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // )
+                          //     .toList(),
                           const SizedBox(height: 20),
                           if (mode != AuthMode.phone)
                             RichText(

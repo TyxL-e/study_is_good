@@ -145,6 +145,14 @@ class _ProfilePageState extends State<ProfilePage> {
 
                                   if (photoURL != null) {
                                     await user.updatePhotoURL(photoURL);
+                                    final docRef = FirebaseFirestore.instance
+                                        .collection("StudyIsGood")
+                                        .doc("Players")
+                                        .collection("All Users")
+                                        .doc(auth!.currentUser!.uid);
+                                    await docRef.set({
+                                      "picURL": photoURL,
+                                    }, SetOptions(merge: true));
                                   }
                                 },
                                 radius: 50,
@@ -231,7 +239,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       const Divider(),
                       TextButton(
-                        onPressed: _deleteUser,
+                        onPressed: () => _deleteUser(context),
                         child: const Text('Delete User'),
                       ),
                     ],
@@ -314,15 +322,32 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> _signOut() async {
     await auth.signOut();
     await GoogleSignIn().signOut();
-    // if(mounted) {
-    //   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-    //   const AuthApp()), (Route<dynamic> route) => false);
-    // }
   }
 
-  /// Example code for sign out.
-  Future<void> _deleteUser() async {
-    await auth.currentUser?.delete();
-    await GoogleSignIn().disconnect();
+  /// Example code for delete user.
+  Future<void> _deleteUser(BuildContext context) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Do you want to delete Your User from this App?'),
+            actions: [
+              TextButton(
+                onPressed: () async {
+                  await auth.currentUser?.delete();
+                  await  FirebaseFirestore.instance.collection("StudyIsGood").doc("Players").collection("All Users").doc(user.uid).delete();
+                },
+                child: const Text("Yes"),
+              ),
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                },
+                child: const Text("Maybe Later"),
+              )
+            ],
+          );
+        }
+    );
   }
 }

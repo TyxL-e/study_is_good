@@ -20,7 +20,7 @@ class DisclaimerPage extends StatelessWidget {
               ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>
-                        const TestCountDownTimer(time: 5,points: 12,)));
+                        const TestCountDownTimer(time: 1800,points: 720,)));
                   },
                   child: const Text("30 mins"), //12 points
               ),

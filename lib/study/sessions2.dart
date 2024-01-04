@@ -6,10 +6,10 @@ import 'dart:math' as math;
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/services.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:study_is_good/audioplayers/common.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:study_is_good/main.dart';
-import 'package:study_is_good/navigation.dart';
 import 'package:study_is_good/session_screen.dart';
 import 'package:study_is_good/timer/countdown_timer.dart';
 
@@ -38,35 +38,23 @@ class _TestCountDownTimerState extends State<TestCountDownTimer> with TickerProv
     if (kIsWeb ||
         ![TargetPlatform.windows, TargetPlatform.linux]
             .contains(defaultTargetPlatform))
-      ClippingAudioSource(
-        start: const Duration(seconds: 60),
-        end: const Duration(seconds: 90),
-        child: AudioSource.uri(Uri.parse(
-            "https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3")),
-        tag: AudioMetadata(
-          album: "Science Friday",
-          title: "A Salute To Head-Scratching Science (30 seconds)",
-          artwork:
-          "https://media.wnyc.org/i/1400/1400/l/80/1/ScienceFriday_WNYCStudios_1400.jpg",
-        ),
-      ),
     AudioSource.uri(
       Uri.parse(
           "https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2Fmusic%2Fmusic%201.mp3?alt=media&token=0edaa54f-94c6-486d-bb87-a6150df75d09"),
-      tag: AudioMetadata(
-        album: "Science Friday",
-        title: "A Salute To Head-Scratching Science",
-        artwork:
-        "https://media.wnyc.org/i/1400/1400/l/80/1/ScienceFriday_WNYCStudios_1400.jpg",
+      tag: MediaItem(
+        album: "Lofi Super",
+        title: "Lofi Super Cool Music Track 1",
+        artUri:
+        Uri.parse("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FMoai%20Statue.jpg?alt=media&token=d3ea0a12-3060-4010-ae4f-fd63934fe0e5&_gl=1*yum4i*_ga*MTk4MDk5MTA5NC4xNjkxMTYzMzk1*_ga_CW55HF8NVT*MTY5NjAyOTIxMy4xNC4xLjE2OTYwMzM0MzguNDguMC4w"), id: '1',
       ),
     ),
     AudioSource.uri(
       Uri.parse("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2Fmusic%2Fmusic%202.mp3?alt=media&token=084b2100-ccee-4a74-9427-5d672341ba56"),
-      tag: AudioMetadata(
-        album: "Science Friday",
-        title: "From Cat Rheology To Operatic Incompetence",
-        artwork:
-        "https://media.wnyc.org/i/1400/1400/l/80/1/ScienceFriday_WNYCStudios_1400.jpg",
+      tag: MediaItem(
+        album: "Lofi Super",
+        title: "Lofi Super Cool Music Track 2",
+        artUri:
+        Uri.parse("https://firebasestorage.googleapis.com/v0/b/chat-app-91a9d.appspot.com/o/StudyIsGood%2FMoai%20Statue.jpg?alt=media&token=d3ea0a12-3060-4010-ae4f-fd63934fe0e5&_gl=1*yum4i*_ga*MTk4MDk5MTA5NC4xNjkxMTYzMzk1*_ga_CW55HF8NVT*MTY5NjAyOTIxMy4xNC4xLjE2OTYwMzM0MzguNDguMC4w"), id: '2',
       ),
     ),
   ]);
@@ -205,15 +193,15 @@ class _TestCountDownTimerState extends State<TestCountDownTimer> with TickerProv
     super.dispose();
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state == AppLifecycleState.paused) {
-      // Release the player's resources when not in use. We use "stop" so that
-      // if the app resumes later, it will still remember what position to
-      // resume from.
-      _player.stop();
-    }
-  }
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   if (state == AppLifecycleState.paused) {
+  //     // Release the player's resources when not in use. We use "stop" so that
+  //     // if the app resumes later, it will still remember what position to
+  //     // resume from.
+  //     _player.stop();
+  //   }
+  // }
 
   /// Collects the data useful for displaying in a seek bar, using a handy
   /// feature of rx_dart to combine the 3 streams of interest into one.

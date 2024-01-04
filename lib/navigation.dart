@@ -3,11 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:study_is_good/authentication/auth.dart';
 import 'package:study_is_good/home_screen.dart';
 import 'package:study_is_good/profile_page.dart';
-import 'package:study_is_good/session_screen.dart';
 import 'package:study_is_good/shops/cart_page.dart';
-import 'package:study_is_good/shops/shop_page.dart';
 import 'package:study_is_good/shops/shop_test.dart';
-import 'package:study_is_good/test_everything_screen.dart';
+
 
 class BottomNavigationBarControl extends StatefulWidget {
   const BottomNavigationBarControl({super.key});
@@ -52,10 +50,6 @@ class _BottomNavigationBarControlState
             icon: Icon(Icons.account_circle),
             label: 'Profile',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.sensors_sharp),
-          //   label: 'Session',
-          // ),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],

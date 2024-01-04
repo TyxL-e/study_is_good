@@ -10,41 +10,38 @@ class MyCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // body: CustomScrollView(
-      //   slivers: [
-      //     _MyAppBar(),
-      //     const SliverToBoxAdapter(child: SizedBox(height: 12)),
-      //     // SliverList(
-      //     //   delegate: SliverChildBuilderDelegate(
-      //     //           (context, index) => _MyListItem(index)),
-      //     // ),
-      //     ListView.builder(
-      //       itemCount: CatalogModel.itemNames.length,
-      //       // prototypeItem: _MyListItem(index),
-      //       itemBuilder: (context, index) {
-      //         return _MyListItem(index);
-      //       },
-      //     ),
-      //   ],
-      // ),
-      appBar: AppBar(
-        title: const Text('Catalog'),
-        actions: [
-          IconButton(
-              icon: const Icon(Icons.shopping_cart),
-              onPressed: () => {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const MyCart())),
-              }
+    return FutureBuilder(
+      future: CatalogModel().getItemsFromFirestore(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Center(
+            child: Text(snapshot.error.toString()),
+          );
+        }
+        if (!snapshot.hasData) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        List data = snapshot.requireData.toList();
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Catalog'),
+            actions: [
+              IconButton(
+                  icon: const Icon(Icons.shopping_cart),
+                  onPressed: () => {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MyCart())),
+                  }
+              ),
+            ],
           ),
-        ],
-      ),
-      body: ListView.builder(
-        itemCount: CatalogModel.itemNames.length,
-        itemBuilder: (context, index) {
-          return _MyListItem(index);
-        },
-      ),
+          body: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (context, index) {
+              return _MyListItem(index);
+            },
+          ),
+        );
+      }
     );
 
   }
@@ -83,23 +80,6 @@ class _AddButton extends StatelessWidget {
   }
 }
 
-class _MyAppBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SliverAppBar(
-      title: const Text('Catalog'),
-      floating: true,
-      actions: [
-        IconButton(
-          icon: const Icon(Icons.shopping_cart),
-          onPressed: () => {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const MyCart())),
-          }
-        ),
-      ],
-    );
-  }
-}
 
 class _MyListItem extends StatelessWidget {
   final int index;
@@ -122,9 +102,7 @@ class _MyListItem extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 1,
-              child: Container(
-                //color: item.color,
-              ),
+              child: Image.network(item.pictureURL),
             ),
             const SizedBox(width: 24),
             Expanded(
