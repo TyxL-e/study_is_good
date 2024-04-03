@@ -960,7 +960,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: cae95cab0f965ce05b805189de1d4c70b11c76fb
   FirebaseMessaging: 0c0ae1eb722ef0c07f7801e5ded8dccd1357d6d4
   FirebaseStorage: 1d4be239ea32fb3c0f3680a6f2b706d6cabe37f2
-  Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
+  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_background_service_ios: e30e0d3ee69e4cee66272d0c78eacd48c2e94aac
   flutter_local_notifications: 0c0b1ae97e741e1521e4c1629a459d04b9aec743
   flutter_timezone: ffb07bdad3c6276af8dada0f11978d8a1f8a20bb
@@ -982,6 +982,6 @@ SPEC CHECKSUMS:
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
 
-PODFILE CHECKSUM: 43d07a2f566c7a13c7677cb6ef97f7c67a26b593
+PODFILE CHECKSUM: bdce365d805b89a89b86f61687c23de0cb7e1597
 
-COCOAPODS: 1.13.0
+COCOAPODS: 1.14.3
